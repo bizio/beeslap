@@ -5,18 +5,42 @@ use BeeSlap\Domain\Bee\Model\Queen;
 use BeeSlap\Domain\Bee\Model\Worker;
 use BeeSlap\Domain\Bee\Model\Drone;
 
+/**
+ *
+ * Bees collection
+ *
+ * @author Fabrizio Manunta <fabrizio@karalisweblabs.com>
+ */
 class Swarm extends \ArrayObject
 {
     const TYPE_QUEEN  = 'Queen';
     const TYPE_WORKER = 'Worker';
     const TYPE_DRONE  = 'Drone';
 
+    /**
+     *
+     * @var array, collectiion of BeeSlap\Domain\Bee\Model\Queen
+     */
     protected $_queenBees;
 
+    /**
+     *
+     * @var array, collectiion of BeeSlap\Domain\Bee\Model\Worker
+     */
     protected $_workerBees;
 
+    /**
+     *
+     * @var array, collectiion of BeeSlap\Domain\Bee\Model\Drone
+     */
     protected $_droneBees;
 
+    /**
+     *
+     * Adds a bee to the collection
+     *
+     * @param BeeSlap\Domain\Bee\Model\Bee
+     */
     public function addBee(Bee $bee)
     {
         switch (true) {
@@ -37,6 +61,12 @@ class Swarm extends \ArrayObject
 
     }
 
+    /**
+     *
+     * Randomly selects a bee from the collection
+     *
+     * @return BeeSlap\Domain\Bee\Model\Bee
+     */
     public function pickRandomBee()
     {
         $bee = $this[rand(0, count($this) - 1)];
@@ -47,26 +77,56 @@ class Swarm extends \ArrayObject
         return $bee;
     }
 
+    /**
+     *
+     * Returns number of queen bees alive
+     *
+     * @return int
+     */
     public function queensCount()
     {
         return $this->_count($this->_queenBees);
     }
 
+    /**
+     *
+     * Returns number of worker bees alive
+     *
+     * @return int
+     */
     public function workersCount()
     {
         return $this->_count($this->_workerBees);
     }
 
+    /**
+     *
+     * Returns number of drone bees alive
+     *
+     * @return int
+     */
     public function dronesCount()
     {
         return $this->_count($this->_droneBees);
     }
 
+    /**
+     *
+     * Total number of bees alive
+     * 
+     * @return int
+     */
     public function count()
     {
         return $this->queensCount() + $this->workersCount() + $this->dronesCount();
     }
 
+    /**
+     *
+     * Returns array rapresentation of the collection
+     *
+     * @return array
+     */
     public function toArray()
     {
         $bees = array();
@@ -77,6 +137,12 @@ class Swarm extends \ArrayObject
         return $bees;
     }
 
+    /**
+     *
+     * Get all bees of a given type
+     *
+     * @return array
+     */
     public function getAllByType($type)
     {
         switch($type) {
@@ -91,6 +157,12 @@ class Swarm extends \ArrayObject
         } 
     }
 
+    /**
+     *
+     * Filter out alive bees from a given collection and returns count
+     *
+     * @return int
+     */
     protected function _count(array $bees)
     {
         $livingBees = array_filter($bees, function(Bee $bee) { 

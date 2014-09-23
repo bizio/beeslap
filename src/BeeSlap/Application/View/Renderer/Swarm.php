@@ -3,18 +3,38 @@
 namespace BeeSlap\Application\View\Renderer;
 use BeeSlap\Application\Dto\Swarm as SwarmDto;
 
+/**
+ *
+ * Swarm html renderer   
+ *
+ * @author Fabrizio Manunta <fabrizio@karalisweblabs.com>
+ */
 class Swarm 
 {
 
+    /**
+     *
+     * @var BeeSlap\Application\Dto\Swarm $_swarm
+     */
     protected $_swarm;
 
-    protected $_error;
-
+    /**
+     *
+     * Initialize the renderer
+     *
+     * @param BeeSlap\Application\Dto\Swarm $swarm
+     */
     public function __construct(SwarmDto $swarm)
     {
         $this->_swarm = $swarm;
     }
     
+    /**
+     *
+     * Renders bees
+     *
+     * @return string
+     */
     public function render()
     {
 

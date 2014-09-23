@@ -2,16 +2,36 @@
 
 namespace BeeSlap\Application\View\Renderer;
 
+/**
+ *
+ * Error message html renderer
+ *
+ * @author Fabrizio Manunta <fabrizio@karalisweblabs.com>
+ */
 class Error 
 {
 
+    /**
+     *
+     * @var string $_error
+     */
     protected $_error;
 
+    /**
+     *
+     * Sets error message
+     * @param string $message
+     */
     public function setError($message)
     {
         $this->_error = $message;
     }
 
+    /**
+     *
+     * Renders html
+     * @return string
+     */
     public function render()
     {
 

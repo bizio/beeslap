@@ -6,13 +6,31 @@ use BeeSlap\Domain\Bee\Service\Swarm as SwarmDomainService;
 use BeeSlap\Domain\Bee\Model\SwarmRepository;
 use BeeSlap\Domain\Bee\Model\Swarm as SwarmModel;
 
+/**
+ *
+ * Game service 
+ *
+ * @author Fabrizio Manunta <fabrizio@karalisweblabs.com>
+ */
 class Game 
 {
     
+    /**
+     *
+     * @var BeeSlap\Domain\Bee\Service\Swarm $_swarmService
+     */
     protected $_swarmService;
 
+    /**
+     *
+     * @var BeeSlap\Domain\Bee\Model\SwarmRepository $_swarmRepository
+     */
     protected $_swarmRepository;
 
+    /**
+     *
+     * Initialize the game
+     */
     public function __construct()
     {
         session_start();
@@ -20,6 +38,12 @@ class Game
         $this->_swarmRepository = new SwarmRepository();
     }
 
+    /**
+     * 
+     * Start a new game
+     *
+     * @return BeeSlap\Application\Dto\Swarm
+     */
     public function newGame()
     {
         $newSwarm = $this->_swarmService->build();
@@ -28,6 +52,12 @@ class Game
 
     }
 
+    /**
+     *
+     * Get current game progress
+     *
+     * @return BeeSlap\Application\Dto\Swarm
+     */
     public function getGameInProgress()
     {
         $swarm = $this->_swarmRepository->get();
@@ -36,6 +66,13 @@ class Game
         }
     }
 
+    /**
+     *
+     * Hit a random bee 
+     *
+     * @return BeeSlap\Application\Dto\Swarm
+     * @throws \Exception
+     */
     public function randomSlap()
     {
         $swarm = $this->_swarmRepository->get();
@@ -52,6 +89,12 @@ class Game
 
     }
 
+    /**
+     *
+     * Kill all queen bees
+     *
+     * @throws \Exception
+     */
     public function killAllQueens()
     {
         $swarm = $this->_swarmRepository->get();
