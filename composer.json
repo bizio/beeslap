@@ -1,4 +1,9 @@
 {
     "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "BeeSlap\\": "src/BeeSlap"
+        }
     }
 }
